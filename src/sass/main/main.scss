@@ -1,0 +1,20 @@
+.mainBanner {
+  background-color: #ededed;
+  height: 60vh;
+  display: grid;
+  place-items: center;
+  margin-bottom: 80px;
+  .mainBanner__content {
+    text-align: center;
+    max-width: 400px;
+    > h2 {
+      font-size: 48px;
+      line-height: 58px;
+      font-weight: 400;
+      color: #116149;
+    }
+    > p {
+      color: #42494f;
+    }
+  }
+}
