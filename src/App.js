@@ -6,6 +6,7 @@ import Main from "./components/mainContent/Main";
 function App() {
   return (
     <div className="App">
+	<h1>Nello Nihal</h1>
       <Header />
       <Main />
     </div>
