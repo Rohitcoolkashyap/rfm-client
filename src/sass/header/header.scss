@@ -3,6 +3,10 @@ $weight: 350;
 ul {
   list-style: none;
 }
+a {
+  text-decoration: none;
+  color: rgb(53, 52, 52);
+}
 .flexbox {
   display: flex;
   align-items: center;
@@ -10,7 +14,7 @@ ul {
 }
 .header {
   background-color: #ffffff;
-//   margin-bottom: 60px;
+  //   margin-bottom: 60px;
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;

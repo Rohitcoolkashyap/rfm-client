@@ -1,33 +1,30 @@
-.footer{
-    background: #116149;
-    color: #d3d3d3;
-    height:400px;
-    position: relative;
+.footer {
+  height: 400px;
+  position: relative;
+  background-color: #f5f6f7;
+  color: #1a1a1a;
 }
-.footer .footer-content{
-    height: 325px;
-    display: flex;
+.footer .footer-content {
+  width: 100%;
+  height: 325px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.footer .footer-content .footer-section {
+  padding: 25px;
+}
 
+.footer .footer-bottom {
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  padding-top: 20px;
 }
-.footer .footer-content .footer-section{
-    flex: 1;
-    padding:25px;
-    border: 1px solid white;
 
-}
-
-.footer .footer-bottom{
-    background: #01271c36;
-    color: #fff;
-    height: 50px;
-    width: 100%;
-    text-align: center;
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    padding-top: 20px;
-}
-.fa-facebook{
-background: #3B5998;
-  color: white;
+.logo-text {
+  color: #116149;
 }
