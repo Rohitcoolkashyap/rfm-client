@@ -1,4 +1,13 @@
+.flexbox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+$weight: 350;
+$colour: #79589f;
 @import "./sass/header/header.scss";
-@import "./sass/Footer/Footer.scss";
+@import "./sass/Footer/footer.scss";
 @import "./sass/main/main.scss";
-@import "./sass/main/mainservices.scss";
+@import "./sass/header/dropdown.scss";
+@import "./sass/main/products.scss";
+@import "./sass/main/cards.scss";

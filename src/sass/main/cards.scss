@@ -1,0 +1,38 @@
+.cards {
+  width: 80%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  height: 30vh;
+
+  .cardImages {
+    .cardImages__inner {
+      color: #ffffff;
+
+      .card-image {
+        width: 100px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 720px) {
+  .cards {
+    width: 100%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    height: 20vh;
+
+    .cardImages {
+      .cardImages__inner {
+        .card-image {
+          width: 70px;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}

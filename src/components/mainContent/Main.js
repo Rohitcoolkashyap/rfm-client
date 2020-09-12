@@ -1,30 +1,33 @@
 import React from "react";
 import MainBanner from "./MainBanner";
-import MainServices from "./MainServices";
-import { Grid } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
-
-
-
-const useStyles = makeStyles({
-    gridContainer: {
-      paddingLeft: "20px",
-      paddingRight: "20px"
-
-    }
-});
+import Products from "./Products";
+import { data, data2 } from "../../data";
+import Cards from "./Card";
 export default function Main() {
-  const classes = useStyles();
   return (
     <div className="main">
       <div className="mainBanner">
         <MainBanner />
       </div>
-      <Grid container spacing={1} className={classes.gridContainer} justify="center">
-      <Grid item xs={12} sm={6} md={4}>
-      <MainServices />
-    </Grid>
-    </Grid>
+
+      <div className="cards">
+        {data2.map((d, index) => (
+          <Cards key={index} img={d.img} title={d.title} />
+        ))}
+      </div>
+
+      <div className="main__products">
+        <h1 className="main__products__title">Our Services</h1>
+        {data.map((d, index) => (
+          <Products
+            key={index}
+            num={index + 1}
+            img={d.img}
+            title={d.title}
+            head={d.head}
+          />
+        ))}
+      </div>
     </div>
   );
 }
