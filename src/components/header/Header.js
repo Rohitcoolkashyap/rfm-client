@@ -20,9 +20,9 @@ export default function Header() {
             <div class="dropdown">
               <button class="dropbtn">Services</button>
               <div class="dropdown-content">
-                <a href="/">Link 1</a>
-                <a href="/">Link 2</a>
-                <a href="/">Link 3</a>
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
               </div>
             </div>
           </li>
@@ -30,9 +30,9 @@ export default function Header() {
             <div class="dropdown">
               <button class="dropbtn">About</button>
               <div class="dropdown-content">
-                <a href="/">Link 1</a>
-                <a href="/">Link 2</a>
-                <a href="/">Link 3</a>
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
               </div>
             </div>
           </li>
@@ -43,9 +43,9 @@ export default function Header() {
             <div class="dropdown">
               <button class="dropbtn">Docs</button>
               <div class="dropdown-content">
-                <a href="/">Link 1</a>
-                <a href="/">Link 2</a>
-                <a href="/">Link 3</a>
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
               </div>
             </div>
           </li>
@@ -57,12 +57,7 @@ export default function Header() {
       <div className="header__right">
         <ul className="header__right__nav">
           <li className="header__right__nav__list">Contact</li>
-
-          <li className="">
-          <Link className="header__right__nav__list" to="/signin">
-          Sign In
-          </Link>
-          </li>
+          <li className="header__right__nav__list">Sign In</li>
           <li className="">
             <Link className="header__right__nav__list" to="/signup">
               Register
