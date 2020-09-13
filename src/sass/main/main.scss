@@ -67,15 +67,18 @@
           margin-bottom: 20px;
           color: #323839;
         }
-        > button {
+       
+      }
+    }
+  }
+}
+
+ .mainBanner__button {
           background-color: #79589f;
           color: #fff;
           margin-bottom: 15px;
           border: 1px solid transparent;
           font-size: 0.9em;
           padding: 12px 16px;
+          border-radius: 5px;
         }
-      }
-    }
-  }
-}

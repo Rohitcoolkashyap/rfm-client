@@ -16,6 +16,8 @@ function App() {
             <Footer />
           </Route>
           <Route path="/signup" exact component={SignUp}></Route>
+          <Route path="/signin" exact component={Logi}></Route>
+
         </Switch>
       </Router>
     </div>

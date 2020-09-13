@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function MainBanner() {
   return (
@@ -9,7 +10,9 @@ export default function MainBanner() {
       <div className="mainBanner__title">
         <h2>Welcome Back</h2>
         <p>this is a platform which helps you to grow you business</p>
-        <button>SIGNUP FOR FREE</button>
+        <Link className="header__right__nav__list" to="/signup">
+          <button className="mainBanner__button">SIGNUP FOR FREE</button>
+        </Link>
       </div>
     </div>
   );

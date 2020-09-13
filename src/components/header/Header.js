@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
+import { Button } from "@material-ui/core";
 export default function Header() {
   const [menu, setMenu] = useState(false);
   const show = !menu ? "header__left__nav" : "header__left__nav show";
@@ -49,6 +50,8 @@ export default function Header() {
               </div>
             </div>
           </li>
+          <li className="header__left__nav__list">Contact</li>
+
         </ul>
       </div>
 
@@ -56,21 +59,25 @@ export default function Header() {
 
       <div className="header__right">
         <ul className="header__right__nav">
-          <li className="header__right__nav__list">Contact</li>
-          <li className="header__right__nav__list">Sign In</li>
-          <li className="">
+          <li className="header__right__nav__list">Log in or</li>
+
+          <li className="header__right__nav__list">
             <Link className="header__right__nav__list" to="/signup">
-              Register
+              <Button className="signup__but" size="small" variant="contained" >
+                Sign up
+</Button>
             </Link>
           </li>
-          <li className="menuBar">
-            {!menu ? (
-              <MenuIcon onClick={() => setMenu(!menu)} className="menuBar" />
-            ) : (
-              <CloseIcon onClick={() => setMenu(!menu)} className="menuBar" />
-            )}
-          </li>
+
         </ul>
+
+      </div>
+      <div className="menuBar">
+        {!menu ? (
+          <MenuIcon onClick={() => setMenu(!menu)} className="menuBar" />
+        ) : (
+            <CloseIcon onClick={() => setMenu(!menu)} className="menuBar" />
+          )}
       </div>
     </div>
   );

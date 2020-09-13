@@ -39,17 +39,22 @@ a {
 
   //   header right
   .header__right {
+margin-left: 40px;
     .header__right__nav {
       @extend .flexbox;
-      margin-right: 10px;
 
       .header__right__nav__list {
-        margin-left: 10px;
+        margin-left: 5px;
         font-weight: $weight;
         cursor: pointer;
         &:hover {
           color: $colour;
+         
         }
+         .signup__but{
+            background-color: $colour !important;
+            color: #ffffff;
+          }
       }
     }
   }
