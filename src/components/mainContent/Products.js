@@ -22,7 +22,7 @@ function Products({ num, img, title, head }) {
       <div className="product__img">
         <ProgressiveImage src={img} placeholder="gray.png" >
 
-          {(src, loading) => <img style={{ opacity: loading ? 0.5 : 1 }} className="card-image" src={src} alt="an image" />}
+          {(src, loading) => <img style={{ opacity: loading ? 0.5 : 1 }} className="card-image" src={src} alt="" />}
 
         </ProgressiveImage>
       </div>
