@@ -18,9 +18,9 @@ export default function Header() {
 
         <ul className={show}>
           <li className="header__left__nav__list">
-            <div class="dropdown">
-              <button class="dropbtn">Services</button>
-              <div class="dropdown-content">
+            <div className="dropdown">
+              <button className="dropbtn">Services</button>
+              <div className="dropdown-content">
                 <a href="#">Link 1</a>
                 <a href="#">Link 2</a>
                 <a href="#">Link 3</a>
@@ -28,9 +28,9 @@ export default function Header() {
             </div>
           </li>
           <li className="header__left__nav__list">
-            <div class="dropdown">
-              <button class="dropbtn">About</button>
-              <div class="dropdown-content">
+            <div className="dropdown">
+              <button className="dropbtn">About</button>
+              <div className="dropdown-content">
                 <a href="#">Link 1</a>
                 <a href="#">Link 2</a>
                 <a href="#">Link 3</a>
@@ -41,9 +41,9 @@ export default function Header() {
           <li className="header__left__nav__list">Community</li>
 
           <li className="header__left__nav__list">
-            <div class="dropdown">
-              <button class="dropbtn">Docs</button>
-              <div class="dropdown-content">
+            <div className="dropdown">
+              <button className="dropbtn">Docs</button>
+              <div className="dropdown-content">
                 <a href="#">Link 1</a>
                 <a href="#">Link 2</a>
                 <a href="#">Link 3</a>
@@ -51,7 +51,6 @@ export default function Header() {
             </div>
           </li>
           <li className="header__left__nav__list">Contact</li>
-
         </ul>
       </div>
 
@@ -59,25 +58,25 @@ export default function Header() {
 
       <div className="header__right">
         <ul className="header__right__nav">
-          <li className="header__right__nav__list">Log in or</li>
+          <Link to="/signin" className="header__right__nav__list">
+            <li className="header__right__nav__list">Log in or</li>
+          </Link>
 
           <li className="header__right__nav__list">
-            <Link className="header__right__nav__list" to="/signup">
-              <Button className="signup__but" size="small" variant="contained" >
+            <Link to="/signup" className="header__right__nav__list">
+              <Button className="signup__but" size="small" variant="contained">
                 Sign up
-</Button>
+              </Button>
             </Link>
           </li>
-
         </ul>
-
       </div>
       <div className="menuBar">
         {!menu ? (
           <MenuIcon onClick={() => setMenu(!menu)} className="menuBar" />
         ) : (
-            <CloseIcon onClick={() => setMenu(!menu)} className="menuBar" />
-          )}
+          <CloseIcon onClick={() => setMenu(!menu)} className="menuBar" />
+        )}
       </div>
     </div>
   );

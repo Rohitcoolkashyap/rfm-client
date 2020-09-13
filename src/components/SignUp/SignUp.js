@@ -1,27 +1,30 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Lin from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { Link } from "react-router-dom";
+import handleLogin from "../../utils/Auth";
+import axios from "axios";
+import { Link as Li } from "@material-ui/core";
+import baseUrl from "../../utils/baseUrl";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      {"Copyright © "}
+      <Li color="inherit" href="https://material-ui.com/">
         Your Website
-      </Link>{' '}
+      </Li>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -29,24 +32,57 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
 }));
+const INITIAL_USER = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+};
 
 export default function SignUp() {
+  const [user, setUser] = useState(INITIAL_USER);
+  const [disabled, setDisabled] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
+
+  useEffect(() => {
+    const isUser = Object.values(user).every((el) => Boolean(el));
+    isUser ? setDisabled(false) : setDisabled(true);
+  }, [user]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  async function handleSubmit() {
+    try {
+      setLoading(true);
+      // make request to signup user
+      const url = `${baseUrl}/api/signup`;
+      const payload = { ...user };
+      const response = await axios.post(url, payload);
+      handleLogin(response.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
   const classes = useStyles();
 
   return (
@@ -71,6 +107,7 @@ export default function SignUp() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -82,6 +119,7 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -93,6 +131,7 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -105,6 +144,7 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -115,17 +155,19 @@ export default function SignUp() {
             </Grid>
           </Grid>
           <Button
+            disabled={disabled || loading}
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSubmit}
           >
             Sign Up
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link to="/login" variant="body2">
+              <Link to="/signin" className="header__right__nav__list">
                 Already have an account? Sign in
               </Link>
             </Grid>
