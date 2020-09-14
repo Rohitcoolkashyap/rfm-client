@@ -12,10 +12,12 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
-import handleLogin from "../../utils/Auth";
 import axios from "axios";
 import { Link as Li } from "@material-ui/core";
 import baseUrl from "../../utils/baseUrl";
+import cookie from "js-cookie";
+import { useHistory } from "react-router-dom";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -55,28 +57,34 @@ const INITIAL_USER = {
   password: "",
 };
 
-export default function SignUp() {
+export default function SignUp(props) {
   const [user, setUser] = useState(INITIAL_USER);
   const [disabled, setDisabled] = React.useState(true);
   const [loading, setLoading] = React.useState(false);
+  const userInfo = cookie.getJSON("token") || null;
+  const history = useHistory();
 
   useEffect(() => {
     const isUser = Object.values(user).every((el) => Boolean(el));
     isUser ? setDisabled(false) : setDisabled(true);
-  }, [user]);
+
+    if (userInfo !== null) props.history.push("/dashboard");
+  }, [user, userInfo]);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  async function handleSubmit() {
+  async function handleSubmit(e) {
+    e.preventDefault();
     try {
       setLoading(true);
       // make request to signup user
       const url = `${baseUrl}/api/signup`;
+
       const payload = { ...user };
       const response = await axios.post(url, payload);
-      handleLogin(response.data);
+      cookie.set("token", response.data);
     } catch (error) {
       console.log(error);
     } finally {
@@ -95,7 +103,12 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form
+          loading={loading.toString()}
+          onSubmit={handleSubmit}
+          className={classes.form}
+          noValidate
+        >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -161,7 +174,6 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={handleSubmit}
           >
             Sign Up
           </Button>

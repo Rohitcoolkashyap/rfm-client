@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,14 +12,17 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
-
+import { Link as Li } from "@material-ui/core";
+import baseUrl from "../../utils/baseUrl";
+import cookie from "js-cookie";
+import axios from "axios";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Li color="inherit" href="https://material-ui.com/">
         Your Website
-      </Link>{" "}
+      </Li>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -45,9 +48,43 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-
-export default function SignIn() {
+const INITIAL_USER = {
+  email: "",
+  password: "",
+};
+export default function SignIn(props) {
+  const [user, setUser] = useState(INITIAL_USER);
   const classes = useStyles();
+  const [disabled, setDisabled] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
+  const userInfo = cookie.getJSON("token") || null;
+
+  useEffect(() => {
+    const isUser = Object.values(user).every((el) => Boolean(el));
+    isUser ? setDisabled(false) : setDisabled(true);
+
+    if (userInfo !== null) props.history.push("/dashboard");
+  }, [user, userInfo]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prevState) => ({ ...prevState, [name]: value }));
+  };
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      // make request to signup user
+      const url = `${baseUrl}/api/signin`;
+
+      const payload = { ...user };
+      const response = await axios.post(url, payload);
+      cookie.set("token", response.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -59,7 +96,12 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form
+          loading={loading.toString()}
+          onSubmit={handleSubmit}
+          className={classes.form}
+          noValidate
+        >
           <TextField
             variant="outlined"
             margin="normal"
@@ -70,6 +112,7 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={handleChange}
           />
           <TextField
             variant="outlined"
@@ -81,12 +124,14 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleChange}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
           <Button
+            disabled={disabled || loading}
             type="submit"
             fullWidth
             variant="contained"
@@ -97,9 +142,9 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Li href="#" variant="body2">
                 Forgot password?
-              </Link>
+              </Li>
             </Grid>
             <Grid item>
               <Link to="/signup" className="header__right__nav__list">
