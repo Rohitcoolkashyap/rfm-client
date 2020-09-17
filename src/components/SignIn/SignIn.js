@@ -74,7 +74,7 @@ export default function SignIn(props) {
     try {
       setLoading(true);
       // make request to signup user
-      const url = `${baseUrl}/api/signin`;
+      const url = `${baseUrl}/api/login`;
 
       const payload = { ...user };
       const response = await axios.post(url, payload);
